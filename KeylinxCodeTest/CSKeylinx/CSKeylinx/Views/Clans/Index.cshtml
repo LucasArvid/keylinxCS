@@ -1,0 +1,70 @@
+﻿@model IEnumerable<CSKeylinx.Models.RankingModel>
+
+@{
+    ViewData["Title"] = "Home";
+}
+<blockquote class="blockquote text-center">
+    <h1 class="display-4">Clan Ranking</h1>
+</blockquote>
+
+<table class="table">
+    <thead >
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MatchesPlayed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalWonMatches)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalDraws)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalLostMatches)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalWonRounds)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalLostRounds)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalScore)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+            <a asp-controller="Clans" asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Name)</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MatchesPlayed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalWonMatches)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalDraws)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalLostMatches)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalWonRounds)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalLostRounds)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalScore)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

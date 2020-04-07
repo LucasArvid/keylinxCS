@@ -1,0 +1,86 @@
+﻿@model IEnumerable<CSKeylinx.Models.Players>
+
+@{
+    ViewData["Title"] = "Details";
+
+}
+
+<blockquote class="blockquote text-center">
+    <h1 class="display-4">@ViewBag.Clan</h1>
+</blockquote>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Score)
+            </th>
+            <th>
+                Player ID
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td id="@item.Id">
+                    @Html.DisplayFor(modelItem => item.Score)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="row">
+    <div class="col-md-4">
+        <form id="playerForm">
+            <div class="text-danger"></div>
+            <div class="form-group">
+                <p>Player ID</p>
+                <label class="control-label"></label>
+                <input name="id" class="form-control" />
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <p>Score</p>
+                <label class="control-label"></label>
+                <input name="score" class="form-control" />
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <a href="#" class="btn btn-primary" onclick="SavePlayerScore()"> Submit Score</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function SavePlayerScore() {
+
+            var playerId = $('[name=id]').val();
+            var playerScore = $('[name=score]').val();
+
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("Edit", "Clans")",
+                data: { "PlayerId": playerId, "PlayerScore": playerScore },
+                dataTyoe: "json",
+                success: function (result) {
+                    $("#" + playerId).html(playerScore);
+                }
+
+            });
+
+        }
+    </script>
+}
